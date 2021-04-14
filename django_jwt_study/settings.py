@@ -29,13 +29,16 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-	'polls.apps.PollsConfig',
+	# 'polls.apps.PollsConfig',
 	'django.contrib.admin',
 	'django.contrib.auth',
 	'django.contrib.contenttypes',
 	'django.contrib.sessions',
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
+	'rest_framework',
+	'django_filters',
+	'products'
 ]
 
 MIDDLEWARE = [
@@ -53,8 +56,8 @@ ROOT_URLCONF = 'django_jwt_study.urls'
 TEMPLATES = [
 	{
 		'BACKEND': 'django.template.backends.django.DjangoTemplates',
-		'DIRS': [BASE_DIR / 'templates']
-		,
+		# 'DIRS': [BASE_DIR / 'templates'],
+		'DIRS': [],
 		'APP_DIRS': True,
 		'OPTIONS': {
 			'context_processors': [
@@ -98,6 +101,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 REST_FRAMEWORK = {
+	'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
 	'DEFAULT_AUTHENTICATION_CLASSES': (
 		'rest_framework_simplejwt.authentication.JWTAuthentication',
 	)

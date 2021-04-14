@@ -15,20 +15,29 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import (
 	TokenObtainPairView,
 	TokenRefreshView,
 	TokenVerifyView,
 )
 
+from products.views import MyObtainTokenPairView
+from products.views import ProductViewSet
+
+router = DefaultRouter()
+router.register(r'product', ProductViewSet)
+
 urlpatterns = [
-	path('polls/', include('polls.urls')),
 	path('admin/', admin.site.urls),
-	# username, password을 보내
-	path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+	# username, password을 보내 refresh, access 토큰 발급
+	path('api/token/', MyObtainTokenPairView.as_view(), name='token_obtain_pair'),
+	# default token
+	# path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
 	# refresh token을 보내고 access 토큰 재발급
 	path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 	# verify > refresh token 검증
 	path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
-
+	# path('polls/', include('polls.urls')),
+	path('', include(router.urls)),
 ]
