@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 from rest_framework_simplejwt.views import (
 	TokenObtainPairView,
 	TokenRefreshView,
@@ -22,8 +22,9 @@ from rest_framework_simplejwt.views import (
 )
 
 urlpatterns = [
+	path('polls/', include('polls.urls')),
 	path('admin/', admin.site.urls),
-	# username, password을 보내고 refresh, access 토큰 재발급
+	# username, password을 보내
 	path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
 	# refresh token을 보내고 access 토큰 재발급
 	path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
