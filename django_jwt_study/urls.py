@@ -15,7 +15,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from rest_framework_simplejwt.views import (
+	TokenObtainPairView,
+	TokenRefreshView,
+	TokenVerifyView,
+)
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+	path('admin/', admin.site.urls),
+	# username, password을 보내고 refresh, access 토큰 재발급
+	path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+	# refresh token을 보내고 access 토큰 재발급
+	path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+	# verify > refresh token 검증
+	path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
+
 ]
