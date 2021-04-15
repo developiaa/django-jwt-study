@@ -36,6 +36,7 @@ INSTALLED_APPS = [
 	'django.contrib.sessions',
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
+	'rest_framework_simplejwt.token_blacklist',
 	'rest_framework',
 	'django_filters',
 	'products'
@@ -137,7 +138,7 @@ SIMPLE_JWT = {
 	'BLACKLIST_AFTER_ROTATION': True,
 
 	'ALGORITHM': 'HS256',
-	'SIGNING_KEY': 'T2SToFSignInGkEy',
+	'SIGNING_KEY': 'TESTSIGNING_KEY',
 	'VERIFYING_KEY': None,
 	'AUDIENCE': None,
 	'ISSUER': None,
